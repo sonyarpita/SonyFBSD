@@ -11,4 +11,4 @@ kldload t4_tom
 sysctl dev.t6nex.0.toe.tls=1
 ifconfig cc0 toe
 ifconfig cc1 toe
-sysctl dev.t6nex.0.toe.tls_rx_ports=443 989 990 992 993 994 995 1364 4116 5349 6514 8531
+sysctl dev.t6nex.0.toe.tls_rx_ports="443 989 990 992 993 994 995 1364 4116 5349 6514 8531"
