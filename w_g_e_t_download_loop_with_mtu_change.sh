@@ -13,6 +13,7 @@ while [ $i -lt 5001 ]
 do
 Num_Client=`ps -ef | grep wget | wc -l`
 if [ $Num_Client -eq 1 ]
+#NOTE - In order to run this script in FreeBSD environment please change 1 to 0 
 then
 	i=`expr $i + 1`
 	echo "Iteration: $i" >> iter_test_file
@@ -37,4 +38,12 @@ fi
 echo 1 > /proc/sys/vm/drop_caches
 echo 2 > /proc/sys/vm/drop_caches
 echo 3 > /proc/sys/vm/drop_caches
+done
+while :
+do
+        for ((j=1; j<=100; j++))
+        do
+                run_wget 103.$j.$j.77
+                run_wget 104.$j.$j.77
+        done
 done
