@@ -1,4 +1,10 @@
+if [ "$#" -ne 1 ]; then
+  echo "Usage: sh script_to_collect_logs_on_FreeBSD.sh <name of directory>" >&2
+  exit 1
+fi
 mkdir /root/$1
+cd /root/$1
+dmesg > dmesg
 sysctl -n dev.t6nex.0.misc.cim_la > cim_la
 sysctl -n dev.t6nex.0.misc.cim_qcfg > cim_qcfg
 sysctl -n dev.t6nex.0.misc.meminfo > meminfo
@@ -14,7 +20,8 @@ sysctl dev.t6nex.0.misc.cim_obq_ulp0 > obq_ulp0
 sysctl dev.t6nex.0.misc.cim_obq_ulp1 > obq_ulp1
 cxgbetool t6nex0 regdump > regdump
 echo "collecting mc please wait...."
-cxgbetool t6nex0 memdump 0x800000 4285530112 | xxd -r -p > mc
+#cxgbetool t6nex0 memdump 0x800000 4285530112 | xxd -r -p > mc
+cxgbetool t6nex0 memdump 0x800000 1073741824 | xxd -r -p > mc
 
 
 
