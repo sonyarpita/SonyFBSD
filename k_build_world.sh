@@ -45,14 +45,14 @@ fi
 #--------------
 if [ "$1" == "world" ]
 then
-echo "building World:make  buildworld   " >/root/buildresult.txt
+echo "building World:make  buildworld   " >>/root/buildresult.txt
 make -j8 buildworld
 if [ "$?" != 0 ]
 then
-echo "error while building:make  buildworld  " >/root/buildresult.txt
+echo "error while building:make  buildworld  " >>/root/buildresult.txt
 exit
 fi
-echo "make  buildworld          =>completed successfully  " >/root/buildresult.txt
+echo "make  buildworld          =>completed successfully  " >>/root/buildresult.txt
 fi
 
 #build kernel
@@ -65,17 +65,17 @@ make -j8 buildkernel -DNO_KERNELCLEAN KERNCONF=MYKERNEL
 fi
 if [ "$?" != 0 ]
 then
-echo "error while building:make buildkernel -DNO_KERNELCLEAN " >/root/buildresult.txt
+echo "error while building:make buildkernel -DNO_KERNELCLEAN " >>/root/buildresult.txt
 exit
 fi
-echo "make buildkernel -DNO_KERNELCLEAN         =>completed successfully" >/root/buildresult.txt
+echo "make buildkernel -DNO_KERNELCLEAN         =>completed successfully" >>/root/buildresult.txt
 
 #install kernel
 #--------------
 make installkernel KERNCONF=MYKERNEL
 if [ "$?" != 0 ]
 then
-echo "error while building:make installkernel" >/root/buildresult.txt
+echo "error while building:make installkernel" >>/root/buildresult.txt
 exit
 fi
 #install world
@@ -87,13 +87,13 @@ etcupdate -p
 make installworld
 if [ "$?" != 0 ]
 then
-echo "error while building:make installworld " >/root/buildresult.txt
+echo "error while building:make installworld " >>/root/buildresult.txt
 exit
 fi
 fi 
 
 
-echo "Build successfull" > /root/buildresult.txt
+echo "Build successfull" >> /root/buildresult.txt
 
 #Reboot such that the installed binaries will take effect
 shutdown -r now
